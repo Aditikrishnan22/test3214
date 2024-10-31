@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+class Student {
+    std::string name;
+    int age;
+    std::vector<int> marks;
+    int numSubjects;
+
+public:
+    // Constructor to initialize the number of subjects
+    Student(int subjects) : numSubjects(subjects) {
+        marks.resize(numSubjects); // Resizing the vector to hold marks for each subject
+    }
+
+    // Function to set student details
+    void setDetails() {
+        std::cout << "Enter student's name: ";
+        std::getline(std::cin, name);
+        
+        std::cout << "Enter student's age: ";
+        std::cin >> age;
+
+        std::cout << "Enter marks for " << numSubjects << " subjects:\n";
+        for (int i = 0; i < numSubjects; ++i) {
+            std::cout << "Mark for subject " << (i + 1) << ": ";
+            std::cin >> marks[i];
+        }
+    }
+
+    // Function to calculate the sum of marks
+    int calculateTotalMarks() const {
+        int total = 0;
+        for (int mark : marks) {
+            total += mark;
+        }
+        return total;
+    }
+
+    // Function to display student details and marks
+    void displayDetails() const {
+        std::cout << "Student's Name: " << name << std::endl;
+        std::cout << "Student's Age: " << age << std::endl;
+        
+        std::cout << "Marks:\n";
+        for (int i = 0; i < numSubjects; ++i) {
+            std::cout << "Subject " << (i + 1) << ": " << marks[i] << std::endl;
+        }
+        
+        std::cout << "Total Marks: " << calculateTotalMarks() << std::endl;
+    }
+};
+
+int main() {
+    int subjects;
+    std::cout << "Enter the number of subjects: ";
+    std::cin >> subjects;
+    std::cin.ignore(); // Clear the input buffer
+
+    Student student(subjects);
+
+    // Ask user to input student details
+    student.setDetails();
+
+    // Display the student details and marks
+    std::cout << "\nDisplaying Student Details:\n";
+    student.displayDetails();
+
+    return 0;
+}
